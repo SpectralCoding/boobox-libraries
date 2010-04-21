@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Xml;
 
 
 namespace BooBox {
@@ -146,6 +147,7 @@ namespace BooBox {
 			return returnStr;
 		}
 
+		/*
 		/// <summary>
 		/// Converts a song's ID3 tag to a XML String.
 		/// </summary>
@@ -184,6 +186,6 @@ namespace BooBox {
 			XmlWriter.Close();
 			return tempResult.ToString();
 		}
-
+		*/
 	}
 }
