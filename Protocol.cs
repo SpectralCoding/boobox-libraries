@@ -4,6 +4,6 @@ using System.Linq;
 using System.Text;
 
 namespace BooBox {
-	public class Class1 {
+	class Protocol {
 	}
 }
