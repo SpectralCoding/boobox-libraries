@@ -73,6 +73,11 @@ namespace BooBox {
 			return tempSongInfo;
 		}
 
+		/// <summary>
+		/// Generates a MD5 Hash from a SongInfo object using information unique to the SongInfo object.
+		/// </summary>
+		/// <param name="inputSongInfo">SongInfo object.</param>
+		/// <returns>String containing a MD5 hash.</returns>
 		public static String CreateMD5FromSongInfo(SongInfo inputSongInfo) {
 			System.Security.Cryptography.MD5CryptoServiceProvider MD5Crypto = new System.Security.Cryptography.MD5CryptoServiceProvider();
 			byte[] MD5Data = System.Text.Encoding.Unicode.GetBytes("|" + inputSongInfo.Album + "|" + inputSongInfo.AlbumArtists.Length + "|" + inputSongInfo.BitRate + "|" + inputSongInfo.Comment + "|" + inputSongInfo.EndByte + "|" + inputSongInfo.FileLength + "|" + inputSongInfo.Genres.Length + "|" + inputSongInfo.PlayLength + "|" + inputSongInfo.StartByte + "|" + inputSongInfo.Title + "|" + inputSongInfo.Track + "|" + inputSongInfo.TrackCount + "|" + inputSongInfo.Year + "|");
@@ -165,6 +170,12 @@ namespace BooBox {
 			return returnStr;
 		}
 
+		/// <summary>
+		/// Converts bytes into a human readable format rounded to an accuracy.
+		/// </summary>
+		/// <param name="Bytes">Number of bytes to be converted.</param>
+		/// <param name="Accuracy">Decimal accuracy. Use 0 for no decimal point.</param>
+		/// <returns>String in the format of [Number][Unit]</returns>
 		public static String BytesToHumanReadable(long Bytes, int Accuracy) {
 			if (Bytes < 1073741824) {
 				return Math.Round((Bytes / 1048576.0), Accuracy).ToString("0.0") + "MB";
@@ -175,6 +186,11 @@ namespace BooBox {
 			}
 		}
 
+		/// <summary>
+		/// Converts milliseconds to a human readable format.
+		/// </summary>
+		/// <param name="Milliseconds">Number of milliseconds to convert</param>
+		/// <returns>Returns a hh:mm:ss formated string.</returns>
 		public static String MillisecondsToHumanReadable(double Milliseconds) {
 			TimeSpan tempTS = new TimeSpan(0, 0, 0, 0, Convert.ToInt32(Milliseconds));
 			if (tempTS.Hours > 0) {
