@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Xml;
-
+using System.Security.Cryptography;
 
 namespace BooBox {
 	public class Functions {
@@ -41,30 +41,47 @@ namespace BooBox {
 			}
 		}
 
-		/*
 		/// <summary>
-		/// Converts a TagLib.File to a MusicFile object.
+		/// Converts a TagLib.File to a SongInfo object.
 		/// </summary>
-		/// <param name="ID3File">TagLib.File to Convert to MusicFile.</param>
-		/// <returns>MusicFile containing data from TagLib.File</returns>
-		public static MusicFile ID3ToMusicFile(TagLib.File ID3File) {
-			MusicFile tempMusicFile = new MusicFile();
+		/// <param name="ID3File">TagLib.File to Convert to SongInfo.</param>
+		/// <param name="ServerGUID">GUID of the server who owns the file.</param>
+		/// <returns>SongInfo containing data from TagLib.File</returns>
+		public static SongInfo ID3ToSongInfo(TagLib.File ID3File, String ServerGUID) {
+			SongInfo tempSongInfo = new SongInfo();
 			String[] tempStr = new String[ID3File.Tag.AlbumArtists.Length];
-			tempMusicFile.Album = RemoveNewLineChars(ID3File.Tag.Album);
-			for (int i = 0; i < ID3File.Tag.AlbumArtists.Length; i++) { tempStr[i] = Functions.RemoveNewLineChars(ID3File.Tag.AlbumArtists[i]); }
-			tempMusicFile.AlbumArtists = tempStr;
-			tempMusicFile.Comment = Functions.RemoveNewLineChars(ID3File.Tag.Comment);
-			tempMusicFile.FileName = Functions.RemoveNewLineChars(ID3File.Name);
+			tempSongInfo.Album = RemoveNewLineChars(ID3File.Tag.Album);
+			for (int i = 0; i < ID3File.Tag.AlbumArtists.Length; i++) { tempStr[i] = RemoveNewLineChars(ID3File.Tag.AlbumArtists[i]); }
+			tempSongInfo.AlbumArtists = tempStr;
+			tempSongInfo.BitRate = ID3File.Properties.AudioBitrate;
+			tempSongInfo.Comment = RemoveNewLineChars(ID3File.Tag.Comment);
+			tempSongInfo.EndByte = ID3File.InvariantEndPosition;
+			tempSongInfo.FileLength = ID3File.Length;
+			tempSongInfo.FileName = RemoveNewLineChars(ID3File.Name);
 			tempStr = new String[ID3File.Tag.Genres.Length];
-			for (int i = 0; i < ID3File.Tag.Genres.Length; i++) { tempStr[i] = Functions.RemoveNewLineChars(ID3File.Tag.Genres[i]); }
-			tempMusicFile.Genres = tempStr;
-			tempMusicFile.Title = Functions.RemoveNewLineChars(ID3File.Tag.Title);
-			tempMusicFile.Track = (int)ID3File.Tag.Track;
-			tempMusicFile.TrackCount = (int)ID3File.Tag.TrackCount;
-			tempMusicFile.Year = (int)ID3File.Tag.Year;
-			return tempMusicFile;
+			for (int i = 0; i < ID3File.Tag.Genres.Length; i++) { tempStr[i] = RemoveNewLineChars(ID3File.Tag.Genres[i]); }
+			tempSongInfo.Genres = tempStr;
+			tempSongInfo.PlayLength = ID3File.Properties.Duration.TotalMilliseconds;
+			tempSongInfo.ServerGUID = ServerGUID;
+			tempSongInfo.StartByte = ID3File.InvariantStartPosition;
+			tempSongInfo.Title = RemoveNewLineChars(ID3File.Tag.Title);
+			tempSongInfo.Track = (int)ID3File.Tag.Track;
+			tempSongInfo.TrackCount = (int)ID3File.Tag.TrackCount;
+			tempSongInfo.Year = (int)ID3File.Tag.Year;
+			tempSongInfo.MD5 = CreateMD5FromSongInfo(tempSongInfo);
+			return tempSongInfo;
 		}
-		*/
+
+		public static String CreateMD5FromSongInfo(SongInfo inputSongInfo) {
+			System.Security.Cryptography.MD5CryptoServiceProvider MD5Crypto = new System.Security.Cryptography.MD5CryptoServiceProvider();
+			byte[] MD5Data = System.Text.Encoding.Unicode.GetBytes("|" + inputSongInfo.Album + "|" + inputSongInfo.AlbumArtists.Length + "|" + inputSongInfo.BitRate + "|" + inputSongInfo.Comment + "|" + inputSongInfo.EndByte + "|" + inputSongInfo.FileLength + "|" + inputSongInfo.Genres.Length + "|" + inputSongInfo.PlayLength + "|" + inputSongInfo.StartByte + "|" + inputSongInfo.Title + "|" + inputSongInfo.Track + "|" + inputSongInfo.TrackCount + "|" + inputSongInfo.Year + "|");
+			MD5Data = MD5Crypto.ComputeHash(MD5Data);
+			string MD5Output = "";
+			for (int i = 0; i < MD5Data.Length; i++) {
+				MD5Output += MD5Data[i].ToString("x2").ToUpper();
+			}
+			return MD5Output;
+		}
 
 		/// <summary>
 		/// Dumps a byte[] Array to a file.

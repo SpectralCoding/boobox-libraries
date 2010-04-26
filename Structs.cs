@@ -27,11 +27,12 @@ namespace BooBox {
 		public int Track;
 		public int TrackCount;
 		public int Year;
-		public int StartByte;
-		public int EndByte;
+		public long StartByte;
+		public long EndByte;
 		public long FileLength;
 		public int BitRate;
-		public long PlayLength;
+		public double PlayLength;
+		public String MD5;
 	}
 
 	public struct ServerDetail {
