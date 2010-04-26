@@ -56,11 +56,12 @@ namespace BooBox {
 			tempSongInfo.BitRate = ID3File.Properties.AudioBitrate;
 			tempSongInfo.Comment = RemoveNewLineChars(ID3File.Tag.Comment);
 			tempSongInfo.EndByte = ID3File.InvariantEndPosition;
-			tempSongInfo.FileLength = ID3File.Length;
+			tempSongInfo.FileLength = (new FileInfo(ID3File.Name)).Length;
 			tempSongInfo.FileName = RemoveNewLineChars(ID3File.Name);
 			tempStr = new String[ID3File.Tag.Genres.Length];
 			for (int i = 0; i < ID3File.Tag.Genres.Length; i++) { tempStr[i] = RemoveNewLineChars(ID3File.Tag.Genres[i]); }
 			tempSongInfo.Genres = tempStr;
+			tempSongInfo.PlayCount = 0;
 			tempSongInfo.PlayLength = ID3File.Properties.Duration.TotalMilliseconds;
 			tempSongInfo.ServerGUID = ServerGUID;
 			tempSongInfo.StartByte = ID3File.InvariantStartPosition;
@@ -162,6 +163,25 @@ namespace BooBox {
 				returnStr = returnStr.Substring(0, (returnStr.Length - Delimiter.Length));
 			}
 			return returnStr;
+		}
+
+		public static String BytesToHumanReadable(long Bytes, int Accuracy) {
+			if (Bytes < 1073741824) {
+				return Math.Round((Bytes / 1048576.0), Accuracy).ToString("0.0") + "MB";
+			} else if (Bytes < 1099511627776) {
+				return Math.Round((Bytes / 1073741824.0), Accuracy).ToString("0.0") + "GB";
+			} else {
+				return Math.Round((Bytes / 1099511627776.0), Accuracy).ToString("0.0") + "TB";
+			}
+		}
+
+		public static String MillisecondsToHumanReadable(double Milliseconds) {
+			TimeSpan tempTS = new TimeSpan(0, 0, 0, 0, Convert.ToInt32(Milliseconds));
+			if (tempTS.Hours > 0) {
+				return tempTS.Hours.ToString() + ":" + tempTS.Minutes.ToString("00") + ":" + tempTS.Seconds.ToString("00");
+			} else {
+				return tempTS.Minutes.ToString() + ":" + tempTS.Seconds.ToString("00");
+			}
 		}
 
 		/*

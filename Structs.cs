@@ -33,6 +33,7 @@ namespace BooBox {
 		public int BitRate;
 		public double PlayLength;
 		public String MD5;
+		public int PlayCount;
 	}
 
 	public struct ServerDetail {
