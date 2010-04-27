@@ -16,4 +16,12 @@ namespace BooBox {
 		On
 	}
 
+	public enum ConnectionMode {
+		LibraryRequest
+	}
+
+	public enum ConnectionStatus {
+		Pending
+	}
+
 }

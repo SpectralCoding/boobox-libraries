@@ -75,6 +75,22 @@ namespace BooBox {
 			}
 		}
 
+		/// <summary>
+		/// Adds a line of server text to the log file.
+		/// </summary>
+		/// <param name="LineToAdd">Line of plaintext to add</param>
+		/// <param name="ServerNumber">Number of the server related to the line of plaintext</param>
+		public static void AddServerText(String LineToAdd, int ServerNumber) {
+			if (LogFS == null) {
+				if (!Directory.Exists("logs/")) {
+					Directory.CreateDirectory("logs/");
+				}
+				OpenLog();
+			}
+			if ((LogFS != null) && (LogSW != null)) {
+				LogSW.WriteLine(DateTime.Now.ToString("hh:mm:ss.fff ") + "[SV-" + ServerNumber.ToString() + "]\t" + LineToAdd);
+			}
+		}
 
 	}
 }
