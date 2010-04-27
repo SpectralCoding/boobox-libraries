@@ -17,11 +17,13 @@ namespace BooBox {
 	}
 
 	public enum ConnectionMode {
-		LibraryRequest
+		LibraryRequest,
+		SongRequest
 	}
 
 	public enum ConnectionStatus {
-		Pending
+		Pending,
+		Connected
 	}
 
 }
