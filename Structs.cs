@@ -6,6 +6,7 @@ using System.Text;
 namespace BooBox {
 
 	public struct ConnectionInfo {
+		public String Hostname;
 		public String IPAddress;
 		public int InfoPort;
 		public int StreamPort;

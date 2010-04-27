@@ -6,6 +6,7 @@ using System.Text;
 using System.IO;
 using System.Xml;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 
 namespace BooBox {
 	public class Functions {
@@ -28,6 +29,10 @@ namespace BooBox {
 				ReturnList.AddRange(RecursiveDirctoryListing(Dir.FullName, FileMask));
 			}
 			return ReturnList;
+		}
+
+		public static int OccurancesInString(String Haystack, String Needle) {
+			return Regex.Matches(Haystack, Needle).Count;
 		}
 
 		/// <summary>
