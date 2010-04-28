@@ -96,6 +96,36 @@ namespace BooBox {
 			return "PASS " + Password;
 		}
 
+		/// <summary>
+		/// Creates a REQUEST LIBRARY statement to send to a Server.
+		/// </summary>
+		/// <returns>REQUEST LIBRARY</returns>
+		public static String CreateREQUESTLIBRARY(DateTime LibraryLastUpdate) {
+			return "REQUEST LIBRARY " + LibraryLastUpdate.ToString("yyyy-MM-ddTHH:mm:ss.fffffffZ");
+		}
+
+		/// <summary>
+		/// Creates a REQUESTR LIBRARYLEN statement to be sent to the Client.
+		/// </summary>
+		/// <param name="CompressedXMLString">String containing XML Data from the Library.</param>
+		/// <returns>REQUESTR LIBRARYLEN [Library Length in Bytes] [Number of Songs]</returns>
+		public static String CreateREQUESTRLIBRARYMETA(String CompressedXMLString, int SongCount, DateTime LibraryCreationDate) {
+			return "REQUESTR LIBRARYMETA " + CompressedXMLString.Length + " " + SongCount.ToString() + " " + LibraryCreationDate.ToString("yyyy-MM-ddTHH:mm:ss.fffffffZ");
+		}
+
+		public static String CreateREQUESTRLIBRARYUPTODATE() {
+			return "REQUESTR LIBRARYUPTODATE";
+		}
+
+		/// <summary>
+		/// Creates a REQUESTR LIBRARY statement to be sent to the Client.
+		/// </summary>
+		/// <param name="CompressedXMLString">String containing XML Data from the Library.</param>
+		/// <returns>REQUESTR LIBRARY [Library XML String]</returns>
+		public static String CreateREQUESTRLIBRARY(String CompressedXMLString) {
+			return "REQUESTR LIBRARY " + CompressedXMLString;
+		}
+
 
 	}
 }

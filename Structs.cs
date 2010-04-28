@@ -15,26 +15,28 @@ namespace BooBox {
 		public String GUID;
 		public String Name;
 		public String Description;
+		public DateTime LastLibraryQuery;
+		public String InternalGUID;
 	}
 
 	public struct SongInfo {
-		public String FileName;
 		public String Album;
-		public String[] AlbumArtists;
+		public String[] AlbumArtists; 
+		public int BitRate;
 		public String Comment;
+		public long EndByte;
+		public long FileLength;
+		public String FileName;
 		public String[] Genres;
-		public String Title;
+		public String MD5;
+		public int PlayCount;
+		public double PlayLength;
 		public String ServerGUID;
+		public long StartByte; 
+		public String Title;
 		public int Track;
 		public int TrackCount;
 		public int Year;
-		public long StartByte;
-		public long EndByte;
-		public long FileLength;
-		public int BitRate;
-		public double PlayLength;
-		public String MD5;
-		public int PlayCount;
 	}
 
 	public struct ServerDetail {

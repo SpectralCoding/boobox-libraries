@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.IO;
+using System.IO.Compression;
 using System.Xml;
 using System.Security.Cryptography;
-using System.Text.RegularExpressions;
 
 namespace BooBox {
 	public class Functions {
@@ -109,6 +110,21 @@ namespace BooBox {
 		}
 
 		/// <summary>
+		/// Dumps a String to a file.
+		/// </summary>
+		/// <param name="inputString">String to export.</param>
+		/// <param name="FileName">Filename to export to.</param>
+		public static void DumpStringToFile(String inputString, String FileName) {
+			File.Delete(FileName);
+			FileStream MusicFileFS = new FileStream(FileName, FileMode.Create, FileAccess.ReadWrite);
+			if (MusicFileFS.CanWrite) {
+				MusicFileFS.Write(Encoding.UTF8.GetBytes(inputString), 0, Encoding.UTF8.GetBytes(inputString).Length);
+			}
+			MusicFileFS.Close();
+		}
+
+
+		/// <summary>
 		/// Prints the ASCII values of every character in a character array delimited by a pipe character to the Console.
 		/// </summary>
 		/// <param name="inputCharArr">String to be split.</param>
@@ -203,6 +219,55 @@ namespace BooBox {
 			} else {
 				return tempTS.Minutes.ToString() + ":" + tempTS.Seconds.ToString("00");
 			}
+		}
+
+		/// <summary>
+		/// Compresses a String using the gzip compression method.
+		/// </summary>
+		/// <param name="inputString">String to compress</param>
+		/// <returns>Base64String containing the compressed data</returns>
+		public static string CompressString(String inputString) {
+			byte[] buffer = Encoding.UTF8.GetBytes(inputString);
+			MemoryStream ms = new MemoryStream();
+			using (GZipStream zip = new GZipStream(ms, CompressionMode.Compress, true)) {
+				zip.Write(buffer, 0, buffer.Length);
+			}
+			ms.Position = 0;
+			MemoryStream outStream = new MemoryStream();
+			byte[] compressed = new byte[ms.Length];
+			ms.Read(compressed, 0, compressed.Length);
+			byte[] gzBuffer = new byte[compressed.Length + 4];
+			System.Buffer.BlockCopy(compressed, 0, gzBuffer, 4, compressed.Length);
+			System.Buffer.BlockCopy(BitConverter.GetBytes(buffer.Length), 0, gzBuffer, 0, 4);
+			return Convert.ToBase64String(gzBuffer);
+		}
+
+		/// <summary>
+		/// Decompresses a String using the gzip compression method.
+		/// </summary>
+		/// <param name="compressedString">Base64String to decompress</param>
+		/// <returns>Decompressed UTF8 string</returns>
+		public static string DecompressString(String compressedString) {
+			byte[] gzBuffer = Convert.FromBase64String(compressedString);
+			using (MemoryStream ms = new MemoryStream()) {
+				int msgLength = BitConverter.ToInt32(gzBuffer, 0);
+				ms.Write(gzBuffer, 4, gzBuffer.Length - 4);
+				byte[] buffer = new byte[msgLength];
+				ms.Position = 0;
+				using (GZipStream zip = new GZipStream(ms, CompressionMode.Decompress)) {
+					zip.Read(buffer, 0, buffer.Length);
+				}
+				return Encoding.UTF8.GetString(buffer);
+			}
+		}
+
+		public static int ConnectionInfoInternalGUIDToIndex(List<ConnectionInfo> ConnectionInfoList, String GUID) {
+			for (int i = 0; i < ConnectionInfoList.Count; i++) {
+				if (ConnectionInfoList[i].InternalGUID == GUID) {
+					return i;
+				}
+			}
+			return -1;
 		}
 
 		/*
