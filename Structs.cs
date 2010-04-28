@@ -44,4 +44,10 @@ namespace BooBox {
 		public String Value;
 	}
 
+	public struct ServerStatus {
+		public String InternalGUID;
+		public String GUID;
+		public Boolean Online;
+	}
+
 }

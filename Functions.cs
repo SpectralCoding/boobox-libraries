@@ -270,6 +270,15 @@ namespace BooBox {
 			return -1;
 		}
 
+		public static ConnectionInfo ServerGUIDToConnectionInfo(List<ConnectionInfo> ConnectionInfoList, String GUID) {
+			for (int i = 0; i < ConnectionInfoList.Count; i++) {
+				if (ConnectionInfoList[i].GUID == GUID) {
+					return ConnectionInfoList[i];
+				}
+			}
+			return new ConnectionInfo();
+		}
+
 		/*
 		/// <summary>
 		/// Converts a song's ID3 tag to a XML String.
