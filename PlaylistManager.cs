@@ -39,15 +39,17 @@ namespace BooBox {
 			}
 		}
 
-		public static void AddSongInfoListToPlaylist(List<SongInfo> SongInfoList, String PlaylistName) {
+		public static int AddSongInfoListToPlaylist(List<SongInfo> SongInfoList, String PlaylistName) {
+			int successfulCount = 0;
 			for (int i = 0; i < PlaylistList.Count; i++) {
 				if (PlaylistList[i].Name == PlaylistName) {
 					for (int x = 0; x < SongInfoList.Count; x++) {
-						PlaylistList[i].AddSongToList(SongInfoList[x]);
+						if (PlaylistList[i].AddSongToList(SongInfoList[x])) { successfulCount++; }
 					}
-					return;
+					return successfulCount;
 				}
 			}
+			return successfulCount;
 		}
 
 		public static void PrintPlaylistTree() {

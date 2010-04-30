@@ -15,13 +15,15 @@ namespace BooBox {
 		/// Adds a song to the Active Playlist.
 		/// </summary>
 		/// <param name="SongInfo">MusicFile data to be added to the Playlist.</param>
-		public void AddSongToList(SongInfo SongInfo) {
-			if (SongList.Contains(SongInfo)) {
-				MessageBox.Show("This playlist already contains an entry for \"" + SongInfo.Title + "\". You may not add it again.");
-			} else {
-				SongList.Add(SongInfo);
-				//UpdateActivePlaylistDGV();
+		public Boolean AddSongToList(SongInfo SongInfo) {
+			for (int i = 0; i < SongList.Count; i++) {
+				if (SongList[i].MD5 == SongInfo.MD5) {
+					MessageBox.Show("This playlist already contains an entry for \"" + SongInfo.Title + "\". You may not add it again.");
+					return false;
+				}
 			}
+			SongList.Add(SongInfo);
+			return true;
 		}
 
 		public void RemoveSongsByGUID(String GUID) {
