@@ -49,7 +49,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes.cs" />
+    <Compile Include="Miscellaneous.cs" />
     <Compile Include="Enumerations.cs" />
     <Compile Include="Functions.cs" />
     <Compile Include="InputBox.cs" />
