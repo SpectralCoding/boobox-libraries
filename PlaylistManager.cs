@@ -77,5 +77,15 @@ namespace BooBox {
 			}
 		}
 
+		public static int[] GetAttributeCountByName(String PlaylistName) {
+			for (int i = 0; i < PlaylistList.Count; i++) {
+				if (PlaylistList[i].Name == PlaylistName) {
+					return PlaylistList[i].GetAttributeCount();
+				}
+			}
+			int[] tempReturn = { 0, 0, 0 };
+			return tempReturn;
+		}
+
 	}
 }

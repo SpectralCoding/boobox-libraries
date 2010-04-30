@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,6 +33,30 @@ namespace BooBox {
 			}
 			//UpdateMainFrmDGV();
 		}
+
+		/// <summary>
+		/// Returns an int[] array containing attribute count data.
+		/// </summary>
+		/// <returns>int[0] = Total Songs, int[1] = Unique Artists, int[2] = Unique Albums</returns>
+		public int[] GetAttributeCount() {
+			int[] returnInt = new int[3];
+			ArrayList songList = new ArrayList();
+			ArrayList artistList = new ArrayList();
+			ArrayList albumList = new ArrayList();
+			foreach (SongInfo tempSI in SongList) {
+				if (!artistList.Contains(Functions.StringArrToDelimitedStr(tempSI.AlbumArtists, "; "))) {
+					returnInt[1]++;
+					artistList.Add(Functions.StringArrToDelimitedStr(tempSI.AlbumArtists, "; "));
+				}
+				if (!albumList.Contains(tempSI.Album)) {
+					returnInt[2]++;
+					albumList.Add(tempSI.Album);
+				}
+			}
+			returnInt[0] = SongList.Count();
+			return returnInt;
+		}
+
 
 	}
 }
