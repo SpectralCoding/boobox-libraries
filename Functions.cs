@@ -85,8 +85,14 @@ namespace BooBox {
 		/// <param name="inputSongInfo">SongInfo object.</param>
 		/// <returns>String containing a MD5 hash.</returns>
 		public static String CreateMD5FromSongInfo(SongInfo inputSongInfo) {
+			String inputString;
+			inputString = "|" + inputSongInfo.Album + "|";
+			for (int i = 0; i < inputSongInfo.AlbumArtists.Length; i++) { inputString += inputSongInfo.AlbumArtists[i] + "|"; }
+			inputString += inputSongInfo.BitRate + "|";
+			for (int i = 0; i < inputSongInfo.Genres.Length; i++) { inputString += inputSongInfo.Genres[i] + "|"; }
+			inputString += inputSongInfo.PlayLength + "|" + inputSongInfo.Title + "|";
 			System.Security.Cryptography.MD5CryptoServiceProvider MD5Crypto = new System.Security.Cryptography.MD5CryptoServiceProvider();
-			byte[] MD5Data = System.Text.Encoding.Unicode.GetBytes("|" + inputSongInfo.Album + "|" + inputSongInfo.AlbumArtists.Length + "|" + inputSongInfo.BitRate + "|" + inputSongInfo.Comment + "|" + inputSongInfo.EndByte + "|" + inputSongInfo.FileLength + "|" + inputSongInfo.Genres.Length + "|" + inputSongInfo.PlayLength + "|" + inputSongInfo.StartByte + "|" + inputSongInfo.Title + "|" + inputSongInfo.Track + "|" + inputSongInfo.TrackCount + "|" + inputSongInfo.Year + "|");
+			byte[] MD5Data = System.Text.Encoding.Unicode.GetBytes(inputString);
 			MD5Data = MD5Crypto.ComputeHash(MD5Data);
 			string MD5Output = "";
 			for (int i = 0; i < MD5Data.Length; i++) {
