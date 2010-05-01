@@ -26,6 +26,10 @@ namespace BooBox {
 			return true;
 		}
 
+		/// <summary>
+		/// Removes all songs from Playlist by Server GUID.
+		/// </summary>
+		/// <param name="GUID">GUID to remove</param>
 		public void RemoveSongsByGUID(String GUID) {
 			for (int i = 0; i < SongList.Count; i++) {
 				if (SongList[i].ServerGUID == GUID) {

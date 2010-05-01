@@ -113,6 +113,10 @@ namespace BooBox {
 			return "REQUESTR LIBRARYMETA " + CompressedXMLString.Length + " " + SongCount.ToString() + " " + LibraryCreationDate.ToString("yyyy-MM-ddTHH:mm:ss.fffffffZ");
 		}
 
+		/// <summary>
+		/// Creates a REQUESTR LIBRARYUPTODATE statement to be sent to the Client.
+		/// </summary>
+		/// <returns>REQUESTR LIBRARYUPTODATE</returns>
 		public static String CreateREQUESTRLIBRARYUPTODATE() {
 			return "REQUESTR LIBRARYUPTODATE";
 		}

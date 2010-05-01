@@ -8,6 +8,11 @@ namespace BooBox {
 	public static class PlaylistManager {
 		public static List<Playlist> PlaylistList = new List<Playlist>();
 
+		/// <summary>
+		/// Creates a Playlist with the specified Name.
+		/// </summary>
+		/// <param name="Name">Name of new Playlist</param>
+		/// <returns>Boolean revealing whether or not the Playlist was successfully created</returns>
 		public static Boolean CreatePlaylist(String Name) {
 			for (int i = 0; i < PlaylistList.Count; i++) {
 				if (PlaylistList[i].Name == Name) {
@@ -22,6 +27,10 @@ namespace BooBox {
 			return true;
 		}
 
+		/// <summary>
+		/// Lists all playlists by name and song count in a String Array.
+		/// </summary>
+		/// <returns>String[] containing list of Playlists and their song counts</returns>
 		public static String[] ListPlaylists() {
 			String[] tempReturnStr = new String[PlaylistList.Count];
 				for (int i = 0; i < PlaylistList.Count; i++) {
@@ -30,6 +39,10 @@ namespace BooBox {
 			return tempReturnStr;
 		}
 
+		/// <summary>
+		/// Deletes a playlist by name.
+		/// </summary>
+		/// <param name="PlaylistName">Name of playlist to delete</param>
 		public static void DeletePlaylistByName(String PlaylistName) {
 			for (int i = 0; i < PlaylistList.Count; i++) {
 				if (PlaylistList[i].Name == PlaylistName) {
@@ -39,6 +52,12 @@ namespace BooBox {
 			}
 		}
 
+		/// <summary>
+		/// Adds a list of SongInfo objects to a playlist by playlist name.
+		/// </summary>
+		/// <param name="SongInfoList">List of SongInfo objects</param>
+		/// <param name="PlaylistName">Name of playlist to add songs to</param>
+		/// <returns>Integer revealing number of songs successfully added to the playlist.</returns>
 		public static int AddSongInfoListToPlaylist(List<SongInfo> SongInfoList, String PlaylistName) {
 			int successfulCount = 0;
 			for (int i = 0; i < PlaylistList.Count; i++) {
@@ -51,7 +70,10 @@ namespace BooBox {
 			}
 			return successfulCount;
 		}
-
+		
+		/// <summary>
+		/// Prints the playlist tree to the Console.
+		/// </summary>
 		public static void PrintPlaylistTree() {
 			for (int i = 0; i < PlaylistList.Count; i++) {
 				Console.WriteLine(PlaylistList[i].Name + " (" + PlaylistList[i].GUID + ")");
@@ -61,6 +83,11 @@ namespace BooBox {
 			}
 		}
 
+		/// <summary>
+		/// Gets a Playlist's SongInfo list from the playlist name.
+		/// </summary>
+		/// <param name="PlaylistName">Name of playlist sought</param>
+		/// <returns>List of SongInfo objects inside the playlist</returns>
 		public static List<SongInfo> GetPlaylistListByName(String PlaylistName) {
 			for (int i = 0; i < PlaylistList.Count; i++) {
 				if (PlaylistList[i].Name == PlaylistName) {
@@ -70,6 +97,11 @@ namespace BooBox {
 			return new List<SongInfo>();
 		}
 
+		/// <summary>
+		/// Overwrited the playlist related to PlaylistName with SongInfoList's contents.
+		/// </summary>
+		/// <param name="SongInfoList">List of SongInfo objects to populate the playlist with</param>
+		/// <param name="PlaylistName">Name of playlist to overwrite</param>
 		public static void OverwritePlaylistByName(List<SongInfo> SongInfoList, String PlaylistName) {
 			for (int i = 0; i < PlaylistList.Count; i++) {
 				if (PlaylistList[i].Name == PlaylistName) {
@@ -79,6 +111,11 @@ namespace BooBox {
 			}
 		}
 
+		/// <summary>
+		/// Returns an int[] array containing attribute count data for a specific playlist.
+		/// </summary>
+		/// <param name="PlaylistName">Name of playlist to search for</param>
+		/// <returns>int[0] = Total Songs, int[1] = Unique Artists, int[2] = Unique Albums</returns>
 		public static int[] GetAttributeCountByName(String PlaylistName) {
 			for (int i = 0; i < PlaylistList.Count; i++) {
 				if (PlaylistList[i].Name == PlaylistName) {

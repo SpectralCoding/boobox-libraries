@@ -32,6 +32,12 @@ namespace BooBox {
 			return ReturnList;
 		}
 
+		/// <summary>
+		/// Counts the number of occurances of Needle in Haystack.
+		/// </summary>
+		/// <param name="Haystack">String being search</param>
+		/// <param name="Needle">String being searched for</param>
+		/// <returns>Integer representing the number of occurances of Needle in Haystack</returns>
 		public static int OccurancesInString(String Haystack, String Needle) {
 			return Regex.Matches(Haystack, Needle).Count;
 		}
@@ -128,7 +134,6 @@ namespace BooBox {
 			}
 			MusicFileFS.Close();
 		}
-
 
 		/// <summary>
 		/// Prints the ASCII values of every character in a character array delimited by a pipe character to the Console.
@@ -267,6 +272,12 @@ namespace BooBox {
 			}
 		}
 
+		/// <summary>
+		/// Converts a Internal GUID into an Integer representing the Index of that ConnectionInfo object inside of a List.
+		/// </summary>
+		/// <param name="ConnectionInfoList">List of ConnectionInfo objects being searched</param>
+		/// <param name="GUID">Internal GUID to search for</param>
+		/// <returns>Index of ConnectionInfo in ConnectionInfoList which matches the Internal GUID.</returns>
 		public static int ConnectionInfoInternalGUIDToIndex(List<ConnectionInfo> ConnectionInfoList, String GUID) {
 			for (int i = 0; i < ConnectionInfoList.Count; i++) {
 				if (ConnectionInfoList[i].InternalGUID == GUID) {
@@ -276,6 +287,12 @@ namespace BooBox {
 			return -1;
 		}
 
+		/// <summary>
+		/// Converts a Server GUID to a ConnectionInfo object.
+		/// </summary>
+		/// <param name="ConnectionInfoList">List of ConnectionInfo objects being searched</param>
+		/// <param name="GUID">GUID to search for</param>
+		/// <returns>ConnectionInfo object corresponding to GUID</returns>
 		public static ConnectionInfo ServerGUIDToConnectionInfo(List<ConnectionInfo> ConnectionInfoList, String GUID) {
 			for (int i = 0; i < ConnectionInfoList.Count; i++) {
 				if (ConnectionInfoList[i].GUID == GUID) {
@@ -285,45 +302,5 @@ namespace BooBox {
 			return new ConnectionInfo();
 		}
 
-		/*
-		/// <summary>
-		/// Converts a song's ID3 tag to a XML String.
-		/// </summary>
-		/// <param name="ID3Tag">TagLib.File containing Tag Data.</param>
-		/// <returns>XML String</returns>
-		public static String ID3ToXMLString(TagLib.File ID3Tag) {
-			StringWriter tempResult = new StringWriter();
-			XmlWriter XmlWriter = XmlWriter.Create(tempResult);
-			MusicFile tempMF = ID3ToMusicFile(ID3Tag);
-			XmlWriter.WriteStartDocument();
-			XmlWriter.WriteStartElement("song");
-			XmlWriter.WriteElementString("album", tempMF.Album);
-			XmlWriter.WriteStartElement("albumartists");
-			for (int i = 0; i < tempMF.AlbumArtists.Length; i++) {
-				XmlWriter.WriteElementString("artist", tempMF.AlbumArtists[i]);
-			}
-			XmlWriter.WriteEndElement();
-			XmlWriter.WriteElementString("comment", tempMF.Comment);
-			XmlWriter.WriteElementString("endbyte", ID3Tag.InvariantEndPosition.ToString());
-			XmlWriter.WriteElementString("filename", tempMF.FileName);
-			XmlWriter.WriteStartElement("genres");
-			for (int i = 0; i < tempMF.Genres.Length; i++) {
-				XmlWriter.WriteElementString("genre", tempMF.Genres[i]);
-			}
-			XmlWriter.WriteEndElement();
-			XmlWriter.WriteElementString("startbyte", ID3Tag.InvariantStartPosition.ToString());
-			XmlWriter.WriteElementString("title", tempMF.Title);
-			XmlWriter.WriteElementString("track", tempMF.Track.ToString());
-			XmlWriter.WriteElementString("trackcount", tempMF.TrackCount.ToString());
-			XmlWriter.WriteElementString("year", tempMF.Year.ToString());
-			XmlWriter.WriteElementString("filelength", (new FileInfo(ID3Tag.Name)).Length.ToString());
-			XmlWriter.WriteElementString("bitrate", ID3Tag.Properties.AudioBitrate.ToString());
-			XmlWriter.WriteElementString("duration", ID3Tag.Properties.Duration.TotalMilliseconds.ToString());
-			XmlWriter.WriteEndElement();
-			XmlWriter.WriteEndDocument();
-			XmlWriter.Close();
-			return tempResult.ToString();
-		}
-		*/
 	}
 }
