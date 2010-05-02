@@ -18,7 +18,6 @@ namespace BooBox {
 		public Boolean AddSongToList(SongInfo SongInfo) {
 			for (int i = 0; i < SongList.Count; i++) {
 				if (SongList[i].MD5 == SongInfo.MD5) {
-					MessageBox.Show("This playlist already contains an entry for \"" + SongInfo.Title + "\". You may not add it again.");
 					return false;
 				}
 			}
