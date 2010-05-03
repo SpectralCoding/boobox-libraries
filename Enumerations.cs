@@ -21,7 +21,8 @@ namespace BooBox {
 		SongRequest,
 		OnlineTest,
 		PlaylistListRequest,
-		PlaylistRequest
+		PlaylistRequest,
+		FirstConnect
 	}
 
 	public enum ConnectionStatus {
