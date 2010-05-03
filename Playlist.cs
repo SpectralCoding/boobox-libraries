@@ -10,6 +10,8 @@ namespace BooBox {
 		public List<SongInfo> SongList = new List<SongInfo>();
 		public String Name;
 		public String GUID;
+		public String ServerGUID;
+		public Boolean IsLocal;
 
 		/// <summary>
 		/// Adds a song to the Active Playlist.

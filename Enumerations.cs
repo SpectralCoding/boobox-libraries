@@ -19,7 +19,9 @@ namespace BooBox {
 	public enum ConnectionMode {
 		LibraryRequest,
 		SongRequest,
-		OnlineTest
+		OnlineTest,
+		PlaylistListRequest,
+		PlaylistRequest
 	}
 
 	public enum ConnectionStatus {

@@ -50,4 +50,10 @@ namespace BooBox {
 		public Boolean Online;
 	}
 
+	public struct RemotePlaylistInfo {
+		public String ServerGUID;
+		public String Name;
+		public int SongCount;
+	}
+
 }
