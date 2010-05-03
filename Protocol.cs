@@ -130,12 +130,20 @@ namespace BooBox {
 			return "REQUESTR LIBRARY " + CompressedXMLString;
 		}
 
-		public static String CreateREQUESTPLAYLISTLIST(DateTime LastPlaylistListQuery) {
-			return "REQUEST PLAYLISTLIST " + LastPlaylistListQuery.ToString("yyyy-MM-ddTHH:mm:ss.fffffffZ"); ;
+		public static String CreateREQUESTPLAYLISTLIST() {
+			return "REQUEST PLAYLISTLIST";
 		}
 
-		public static String CreateREQUESTRPLAYLISTLIST(String PlaylistName, int SongCount) {
-			return "REQUESTR PLAYLISTLIST " + SongCount.ToString() + " " + PlaylistName;
+		public static String CreateREQUESTRPLAYLISTLIST(String PlaylistName, int SongCount, String GUID) {
+			return "REQUESTR PLAYLISTLIST " + SongCount.ToString() + " " + GUID + " " + PlaylistName;
+		}
+
+		public static String CreateREQUESTRPLAYLISTLISTFINISHED() {
+			return "REQUESTR PLAYLISTLISTFINISHED";
+		}
+
+		public static String CreateREQUESTPLAYLIST(String PlaylistGUID) {
+			return "REQUESTR PLAYLIST " + PlaylistGUID;
 		}
 
 	}

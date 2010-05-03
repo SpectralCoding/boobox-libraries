@@ -10,7 +10,6 @@ namespace BooBox {
 		public List<SongInfo> SongList = new List<SongInfo>();
 		public String Name;
 		public String GUID;
-		public DateTime LastEditDateTime;
 
 		/// <summary>
 		/// Adds a song to the Active Playlist.
@@ -23,7 +22,6 @@ namespace BooBox {
 				}
 			}
 			SongList.Add(SongInfo);
-			LastEditDateTime = DateTime.UtcNow;
 			return true;
 		}
 
@@ -38,7 +36,6 @@ namespace BooBox {
 					i--;
 				}
 			}
-			LastEditDateTime = DateTime.UtcNow;
 			//UpdateMainFrmDGV();
 		}
 
@@ -65,6 +62,9 @@ namespace BooBox {
 			return returnInt;
 		}
 
+		public override String ToString() {
+			return "[Local] " + Name + " (" + SongList.Count.ToString() + ")";
+		}
 
 	}
 }

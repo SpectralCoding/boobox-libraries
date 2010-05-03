@@ -16,7 +16,6 @@ namespace BooBox {
 		public String Name;
 		public String Description;
 		public DateTime LastLibraryQuery;
-		public DateTime LastPlaylistListQuery;
 		public String InternalGUID;
 	}
 
