@@ -130,22 +130,47 @@ namespace BooBox {
 			return "REQUESTR LIBRARY " + CompressedXMLString;
 		}
 
+		/// <summary>
+		/// Creates a REQUEST PLAYLISTLIST to be sent to the Server.
+		/// </summary>
+		/// <returns>REQUEST PLAYLISTLIST</returns>
 		public static String CreateREQUESTPLAYLISTLIST() {
 			return "REQUEST PLAYLISTLIST";
 		}
 
+		/// <summary>
+		/// Creates a REQUESTR PLAYLISTLIST to be sent to the client.
+		/// </summary>
+		/// <param name="PlaylistName">Name of the playlist</param>
+		/// <param name="SongCount">Number of songs in the playlist</param>
+		/// <param name="GUID">GUID of the playlist</param>
+		/// <returns>REQUESTR PLAYLISTLIST [Song Count] [GUID] [Playlist Name]</returns>
 		public static String CreateREQUESTRPLAYLISTLIST(String PlaylistName, int SongCount, String GUID) {
 			return "REQUESTR PLAYLISTLIST " + SongCount.ToString() + " " + GUID + " " + PlaylistName;
 		}
 
+		/// <summary>
+		/// Creates a REQUESTR PLAYLISTLISTFINISED to be sent to the client.
+		/// </summary>
+		/// <returns>REQUESTR PLAYLISTLISTFINISED</returns>
 		public static String CreateREQUESTRPLAYLISTLISTFINISHED() {
 			return "REQUESTR PLAYLISTLISTFINISHED";
 		}
 
+		/// <summary>
+		/// Creates a REQUEST PLAYLIST to be sent to the server.
+		/// </summary>
+		/// <param name="PlaylistGUID">GUID of the playlist being requested</param>
+		/// <returns>REQUEST PLAYLIST [GUID]</returns>
 		public static String CreateREQUESTPLAYLIST(String PlaylistGUID) {
 			return "REQUEST PLAYLIST " + PlaylistGUID;
 		}
 
+		/// <summary>
+		/// Creates a REQUESTR PLAYLIST to be sent to the client.
+		/// </summary>
+		/// <param name="XMLString">XML String containing XML Data for the playlist</param>
+		/// <returns>REQUESTR PLAYLIST [XML String]</returns>
 		public static String CreateREQUESTRPLAYLIST(String XMLString) {
 			return "REQUESTR PLAYLIST " + XMLString;
 		}

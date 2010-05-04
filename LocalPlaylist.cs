@@ -64,10 +64,18 @@ namespace BooBox {
 			return returnInt;
 		}
 
+		/// <summary>
+		/// Returns a string describing the playlist.
+		/// </summary>
+		/// <returns>[Local] Playlist Name (Song Count)</returns>
 		public override String ToString() {
 			return "[Local] " + Name + " (" + SongList.Count.ToString() + ")";
 		}
 
+		/// <summary>
+		/// Returns a string containing the LocalPlaylist in XML form.
+		/// </summary>
+		/// <returns>XML String</returns>
 		public String GetXMLString() {
 			StringWriter tempResult = new StringWriter();
 			XmlWriter XmlWriter = XmlWriter.Create(tempResult);
@@ -77,9 +85,7 @@ namespace BooBox {
 			XmlWriter.WriteElementString("songcount", SongList.Count.ToString());
 			XmlWriter.WriteElementString("guid", GUID);
 			foreach (SongInfo tempSI in SongList) {
-				//XmlWriter.WriteStartElement("song");
 				XmlWriter.WriteElementString("song", tempSI.MD5);
-				//XmlWriter.WriteEndElement();
 			}
 			XmlWriter.WriteEndElement();
 			XmlWriter.WriteEndDocument();
