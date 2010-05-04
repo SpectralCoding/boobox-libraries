@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
+using System.Xml;
 
 namespace BooBox {
 	public class LocalPlaylist {
@@ -64,6 +66,25 @@ namespace BooBox {
 
 		public override String ToString() {
 			return "[Local] " + Name + " (" + SongList.Count.ToString() + ")";
+		}
+
+		public String GetXMLString() {
+			StringWriter tempResult = new StringWriter();
+			XmlWriter XmlWriter = XmlWriter.Create(tempResult);
+			XmlWriter.WriteStartDocument();
+			XmlWriter.WriteStartElement("playlistdata");
+			XmlWriter.WriteElementString("name", Name);
+			XmlWriter.WriteElementString("songcount", SongList.Count.ToString());
+			XmlWriter.WriteElementString("guid", GUID);
+			foreach (SongInfo tempSI in SongList) {
+				//XmlWriter.WriteStartElement("song");
+				XmlWriter.WriteElementString("song", tempSI.MD5);
+				//XmlWriter.WriteEndElement();
+			}
+			XmlWriter.WriteEndElement();
+			XmlWriter.WriteEndDocument();
+			XmlWriter.Close();
+			return tempResult.ToString();
 		}
 
 	}

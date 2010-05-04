@@ -143,7 +143,11 @@ namespace BooBox {
 		}
 
 		public static String CreateREQUESTPLAYLIST(String PlaylistGUID) {
-			return "REQUESTR PLAYLIST " + PlaylistGUID;
+			return "REQUEST PLAYLIST " + PlaylistGUID;
+		}
+
+		public static String CreateREQUESTRPLAYLIST(String XMLString) {
+			return "REQUESTR PLAYLIST " + XMLString;
 		}
 
 	}
