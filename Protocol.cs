@@ -175,5 +175,17 @@ namespace BooBox {
 			return "REQUESTR PLAYLIST " + XMLString;
 		}
 
+		public static String CreateREQUESTSONG(String SongMD5) {
+			return "REQUEST SONG " + SongMD5;
+		}
+
+		public static String CreateREQUESTRSONGKEY(String SongMD5, String SongKey) {
+			return "REQUESTR SONGKEY " + SongMD5 + " " + SongKey;
+		}
+
+		public static String CreateSTREAMSONG(String SongKey) {
+			return "STREAMSONG " + SongKey;
+		}
+
 	}
 }
